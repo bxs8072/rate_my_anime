@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:rate_my_anime/models/person.dart';
 import 'package:rate_my_anime/screens/home_landing_screen/home_landing_screen_bloc.dart';
+import 'package:rate_my_anime/screens/home_screen/home_screen.dart';
 import 'package:rate_my_anime/screens/setup_account_screen/setup_account_screen.dart';
 
 class HomeLandingScreen extends StatelessWidget {
@@ -35,13 +36,7 @@ class HomeLandingScreen extends StatelessWidget {
               homeLandingScreenBloc: bloc,
             );
           } else {
-            return Center(
-              key: key,
-              child: Text(
-                "Account Exists",
-                key: key,
-              ),
-            );
+            return HomeScreen(key: key);
           }
         });
   }
