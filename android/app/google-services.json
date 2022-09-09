@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "576959977823",
+    "project_id": "rate-my-anime-7",
+    "storage_bucket": "rate-my-anime-7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:576959977823:android:1bd7cc242b8d8e0b2e7eea",
+        "android_client_info": {
+          "package_name": "com.example.rate_my_anime"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "576959977823-o2nnhi0eq6tcfc90pstec0he3ehl42le.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDMGLdXxoSbZflBvKu13GXzq8HO89oyhGQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "576959977823-o2nnhi0eq6tcfc90pstec0he3ehl42le.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "576959977823-dra8hla0np0e4bvnif5ogh1pc8hsd2l6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.rateMyAnime"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
