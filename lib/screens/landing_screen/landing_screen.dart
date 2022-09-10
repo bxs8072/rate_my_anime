@@ -15,12 +15,41 @@ class LandingScreen extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             return AlertDialog(
-              title: Text("Error"),
+              title: Text(
+                "Error",
+                key: key,
+              ),
               content: Text(snapshot.error.toString()),
             );
           } else if (!snapshot.hasData) {
             return AuthScreen(key: key);
           } else {
+            if (!snapshot.data!.emailVerified) {
+              return AlertDialog(
+                title: Text(
+                  "Verify your email address ${snapshot.data!.email}",
+                  key: key,
+                ),
+                content: Text(
+                  "Check your inbox or sometimes junk folder in email to verify your email address",
+                  key: key,
+                ),
+                actions: [
+                  IconButton(
+                    onPressed: () {
+                      snapshot.data!.reload();
+                    },
+                    icon: Icon(Icons.refresh, key: key),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      snapshot.data!.sendEmailVerification();
+                    },
+                    child: Text("Send again", key: key),
+                  ),
+                ],
+              );
+            }
             return HomeLandingScreen(
               key: key,
             );

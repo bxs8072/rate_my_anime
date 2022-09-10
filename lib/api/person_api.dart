@@ -23,7 +23,6 @@ class PersonApi {
 
       var jsonResponse = response.body;
 
-      print(jsonResponse);
       return Person.fromJSON(json.decode(jsonResponse));
     } catch (e) {
       rethrow;
@@ -53,7 +52,7 @@ class PersonApi {
 
       var jsonResponse = response.body;
 
-      print(jsonResponse);
+      // print(jsonResponse);
     } catch (e) {
       rethrow;
     }

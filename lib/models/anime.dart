@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 class Anime {
   final String title, link, image;
   Anime({
@@ -16,8 +14,9 @@ class Anime {
 
   factory Anime.fromJSON(dynamic jsonData) {
     return Anime(
-        title: jsonData["title"],
-        link: jsonData["link"],
-        image: jsonData["image"]);
+      title: jsonData["title"],
+      link: jsonData["link"],
+      image: jsonData["image"],
+    );
   }
 }

@@ -1,21 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:rate_my_anime/models/person.dart';
+import 'package:rate_my_anime/pages/dashboard/dashboard.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  final Person person;
+  const HomeScreen({super.key, required this.person});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<Widget> pages = [
-    Center(
-      child: Text("Dashboard"),
-    ),
-    Center(
-      child: Text("Profile"),
-    ),
-  ];
+  List<Widget> get pages => [
+        Dashboard(
+          key: widget.key,
+          person: widget.person,
+        ),
+        Dashboard(
+          key: widget.key,
+          person: widget.person,
+        ),
+      ];
   int currentIndex = 0;
 
   List<BottomNavigationBarItem> bottom = [

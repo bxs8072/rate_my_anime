@@ -36,7 +36,10 @@ class HomeLandingScreen extends StatelessWidget {
               homeLandingScreenBloc: bloc,
             );
           } else {
-            return HomeScreen(key: key);
+            return HomeScreen(
+              key: key,
+              person: snapshot.data!,
+            );
           }
         });
   }
