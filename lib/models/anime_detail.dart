@@ -27,7 +27,7 @@ class AnimeDetail {
     return AnimeDetail(
         type: jsonData["type"],
         plot: jsonData["plot"],
-        episodes: List.from(jsonData["episodes"])
+        episodes: List.from(jsonData["episodes"] ?? [])
             .map((e) => Episode.fromJSON(e))
             .toList(),
         genres: List.from(jsonData["genres"]).map((e) => e.toString()).toList(),

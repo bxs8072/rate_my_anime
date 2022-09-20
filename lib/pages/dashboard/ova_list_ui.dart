@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:rate_my_anime/models/anime.dart';
+import 'package:rate_my_anime/models/person.dart';
 import 'package:rate_my_anime/pages/dashboard/anime_bloc.dart';
 import 'package:rate_my_anime/services/size_services/size_service.dart';
 import 'package:rate_my_anime/custom_widgets/anime_tile/anime_tile.dart';
@@ -8,7 +9,9 @@ import 'package:rate_my_anime/services/theme_services/theme_service.dart';
 
 class OvaListUI extends StatefulWidget {
   final String type, value;
-  const OvaListUI({Key? key, required this.type, required this.value})
+  final Person person;
+  const OvaListUI(
+      {Key? key, required this.type, required this.value, required this.person})
       : super(key: key);
   @override
   State<OvaListUI> createState() => _OvaListUIState();
@@ -67,7 +70,10 @@ class _OvaListUIState extends State<OvaListUI> {
                     delegate: SliverChildBuilderDelegate(
                   (context, i) {
                     Anime anime = list[i];
-                    return AnimeTile(anime: anime);
+                    return AnimeTile(
+                      anime: anime,
+                      person: widget.person,
+                    );
                   },
                   childCount: list.length,
                 )),

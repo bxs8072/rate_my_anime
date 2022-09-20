@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:rate_my_anime/custom_widgets/anime_tile/anime_tile.dart';
 import 'package:rate_my_anime/models/anime.dart';
+import 'package:rate_my_anime/models/person.dart';
 import 'package:rate_my_anime/pages/dashboard/anime_bloc.dart';
 import 'package:rate_my_anime/services/size_services/size_service.dart';
 import 'package:rate_my_anime/services/theme_services/dark_theme.dart';
@@ -9,7 +10,9 @@ import 'package:rate_my_anime/services/theme_services/theme_service.dart';
 
 class PopularListUI extends StatefulWidget {
   final String type, value;
-  const PopularListUI({Key? key, required this.type, required this.value})
+  final Person person;
+  const PopularListUI(
+      {Key? key, required this.type, required this.value, required this.person})
       : super(key: key);
   @override
   State<PopularListUI> createState() => _PopularListUIState();
@@ -51,6 +54,8 @@ class _PopularListUIState extends State<PopularListUI> {
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
+      cacheExtent: 100,
+      physics: const BouncingScrollPhysics(),
       controller: scrollController,
       slivers: [
         StreamBuilder<List<Anime>>(
@@ -68,7 +73,10 @@ class _PopularListUIState extends State<PopularListUI> {
                     delegate: SliverChildBuilderDelegate(
                   (context, i) {
                     Anime anime = list[i];
-                    return AnimeTile(anime: anime);
+                    return AnimeTile(
+                      anime: anime,
+                      person: widget.person,
+                    );
                   },
                   childCount: list.length,
                 )),

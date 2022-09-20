@@ -6,30 +6,33 @@ import 'package:rate_my_anime/api/rating_api.dart';
 import 'package:rate_my_anime/custom_widgets/anime_tile/average_rating_bloc.dart';
 import 'package:rate_my_anime/models/anime.dart';
 import 'package:rate_my_anime/models/anime_detail.dart';
+import 'package:rate_my_anime/models/favorite.dart';
 import 'package:rate_my_anime/models/person.dart';
+import 'package:rate_my_anime/models/rating.dart';
 import 'package:rate_my_anime/services/size_services/size_service.dart';
 import 'package:rate_my_anime/services/theme_services/theme_service.dart';
 import 'package:rate_my_anime/uis/anime_detail_ui/favorite_bloc.dart';
 
-class AddToListSheet extends StatefulWidget {
+class EditToListSheet extends StatefulWidget {
   final Anime anime;
   final Person person;
+  final Favorite favorite;
   final AverageRatingBloc averageRatingBloc;
   final FavoriteBloc favoriteBloc;
 
-  const AddToListSheet({
+  const EditToListSheet({
     Key? key,
     required this.anime,
     required this.person,
+    required this.favorite,
     required this.averageRatingBloc,
     required this.favoriteBloc,
   }) : super(key: key);
-
   @override
-  State<AddToListSheet> createState() => _AddToListSheetState();
+  State<EditToListSheet> createState() => _EditToListSheetState();
 }
 
-class _AddToListSheetState extends State<AddToListSheet> {
+class _EditToListSheetState extends State<EditToListSheet> {
   List<String> items = [
     "Currently Watching",
     "Plan to watch",
@@ -40,7 +43,23 @@ class _AddToListSheetState extends State<AddToListSheet> {
 
   String selectedItem = "Currently Watching";
 
-  double rating = 0.00;
+  Rating? rating;
+
+  void initRating() async {
+    Rating? r = await RatingApi()
+        .retrieve(userId: widget.person.id, anime: widget.anime);
+    setState(() {
+      rating = r!;
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    selectedItem = widget.favorite.status;
+    initRating();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -316,7 +335,7 @@ class _AddToListSheetState extends State<AddToListSheet> {
                                 ),
                               ),
                               Text(
-                                "⭐️ $rating",
+                                "⭐️ ${rating == null ? 0.00 : rating!.rating}",
                                 style: GoogleFonts.lato(
                                   fontSize: 14.0,
                                   fontWeight: FontWeight.w700,
@@ -331,16 +350,16 @@ class _AddToListSheetState extends State<AddToListSheet> {
                 ),
                 SliverToBoxAdapter(
                   child: Slider(
-                      value: rating,
+                      value: rating == null ? 0.00 : rating!.rating,
                       max: 10.00,
                       min: 0.00,
                       divisions: 20,
                       activeColor: ThemeService.primary,
                       thumbColor: ThemeService.primary,
-                      label: "⭐️ $rating",
+                      label: "⭐️ ${rating == null ? 0.00 : rating!.rating}",
                       onChanged: (val) {
                         setState(() {
-                          rating = val;
+                          rating!.rating = val;
                         });
                       }),
                 ),
@@ -356,21 +375,27 @@ class _AddToListSheetState extends State<AddToListSheet> {
                 primary: ThemeService.primary,
               ),
               onPressed: () async {
-                await FavoriteApi().create(
-                    anime: widget.anime,
-                    status: selectedItem,
-                    userId: widget.person.id);
+                await FavoriteApi().update(
+                  favorite: Favorite(
+                      id: widget.favorite.id,
+                      userId: widget.person.id,
+                      anime: widget.anime,
+                      status: selectedItem,
+                      createdAt: widget.favorite.createdAt),
+                );
 
-                await RatingApi().create(
-                    anime: widget.anime,
-                    rating: rating,
-                    userId: widget.person.id);
+                await RatingApi().update(
+                  rating: Rating(
+                      id: rating!.id,
+                      userId: widget.person.id,
+                      anime: widget.anime,
+                      rating: rating!.rating,
+                      createdAt: rating!.createdAt),
+                );
 
+                await widget.averageRatingBloc.update(widget.anime);
                 await widget.favoriteBloc
-                    .update(anime: widget.anime, userId: widget.person.id);
-
-                await widget.averageRatingBloc
-                    .update(widget.anime)
+                    .update(userId: widget.person.id, anime: widget.anime)
                     .then((value) {
                   Navigator.pop(context);
                 });

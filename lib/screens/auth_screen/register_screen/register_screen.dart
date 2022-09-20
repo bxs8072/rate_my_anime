@@ -44,11 +44,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
       await AuthApi()
           .register(emailController.text.trim().toLowerCase(),
               passwordController.text.trim())
-          .then((value) {
-        print(value);
-      }).catchError((error) {
-        print(error);
-      });
+          .then((value) {})
+          .catchError((error) {});
     }
   }
 

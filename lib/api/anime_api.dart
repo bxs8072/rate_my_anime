@@ -9,6 +9,7 @@ class AnimeApi {
 
   Future<List<Anime>> retrieveByType(
       String type, String value, int page) async {
+    print(await ApiService.token);
     try {
       Response response =
           await http.post(Uri.parse("${ApiService.baseURL}/anime"),

@@ -50,6 +50,7 @@ class LandingScreen extends StatelessWidget {
                 ],
               );
             }
+
             return HomeLandingScreen(
               key: key,
             );

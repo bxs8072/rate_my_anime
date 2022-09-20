@@ -23,7 +23,7 @@ class Person {
 
   factory Person.fromJSON(dynamic jsonData) {
     return Person(
-      id: jsonData["id"],
+      id: jsonData["_id"] ?? jsonData["id"],
       uid: jsonData["uid"],
       firstName: jsonData["firstName"],
       middleName: jsonData["middleName"] ?? "",

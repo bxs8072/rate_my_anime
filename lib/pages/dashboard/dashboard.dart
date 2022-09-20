@@ -40,17 +40,40 @@ class _DashboardState extends State<Dashboard>
 
   List<Widget> get pages => [
         PopularListUI(
-            type: tabs[tabIndex]["type"], value: tabs[tabIndex]["value"]),
+          type: tabs[tabIndex]["type"],
+          value: tabs[tabIndex]["value"],
+          person: widget.person,
+        ),
         MoviesListUI(
-            type: tabs[tabIndex]["type"], value: tabs[tabIndex]["value"]),
+          type: tabs[tabIndex]["type"],
+          value: tabs[tabIndex]["value"],
+          person: widget.person,
+        ),
         NewSeasonListUI(
-            type: tabs[tabIndex]["type"], value: tabs[tabIndex]["value"]),
-        OvaListUI(type: tabs[tabIndex]["type"], value: tabs[tabIndex]["value"]),
-        OnaListUI(type: tabs[tabIndex]["type"], value: tabs[tabIndex]["value"]),
+          type: tabs[tabIndex]["type"],
+          value: tabs[tabIndex]["value"],
+          person: widget.person,
+        ),
+        OvaListUI(
+          type: tabs[tabIndex]["type"],
+          value: tabs[tabIndex]["value"],
+          person: widget.person,
+        ),
+        OnaListUI(
+          type: tabs[tabIndex]["type"],
+          value: tabs[tabIndex]["value"],
+          person: widget.person,
+        ),
         TvSeriesListUI(
-            type: tabs[tabIndex]["type"], value: tabs[tabIndex]["value"]),
+          type: tabs[tabIndex]["type"],
+          value: tabs[tabIndex]["value"],
+          person: widget.person,
+        ),
         SpecialListUI(
-            type: tabs[tabIndex]["type"], value: tabs[tabIndex]["value"]),
+          type: tabs[tabIndex]["type"],
+          value: tabs[tabIndex]["value"],
+          person: widget.person,
+        ),
       ];
 
   @override
@@ -63,6 +86,7 @@ class _DashboardState extends State<Dashboard>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
       appBar: AppBar(
         title: Text("Hello ${widget.person.firstName}"),
         bottom: TabBar(
