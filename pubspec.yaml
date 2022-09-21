@@ -50,6 +50,7 @@ dependencies:
 
   # Tools
   email_validator: ^2.1.17
+  intl:
 
 dev_dependencies:
   flutter_test:

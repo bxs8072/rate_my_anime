@@ -5,6 +5,7 @@ import 'package:rate_my_anime/models/anime.dart';
 import 'package:rate_my_anime/models/person.dart';
 import 'package:rate_my_anime/pages/dashboard/anime_bloc.dart';
 import 'package:rate_my_anime/services/size_services/size_service.dart';
+import 'package:rate_my_anime/services/theme_services/dark_theme.dart';
 import 'package:rate_my_anime/services/theme_services/theme_service.dart';
 
 class AnimeUI extends StatefulWidget {
@@ -68,6 +69,9 @@ class _AnimeUIState extends State<AnimeUI> {
           SliverAppBar(
             key: widget.key,
             pinned: true,
+            backgroundColor: ThemeService.isDarkMode(context)
+                ? DarkTheme.appBarBgColor
+                : ThemeService.primary,
             title: Text(widget.value.toUpperCase()),
           ),
           StreamBuilder<List<Anime>>(

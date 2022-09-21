@@ -124,14 +124,17 @@ class _AnimeTileState extends State<AnimeTile> {
                                               const EdgeInsets.only(left: 5.0),
                                           padding: const EdgeInsets.all(4.0),
                                           decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(6.0),
-                                            color: DarkTheme.scaffoldBgColor,
-                                          ),
+                                              borderRadius:
+                                                  BorderRadius.circular(6.0),
+                                              color: ThemeService.isDarkMode(
+                                                      context)
+                                                  ? DarkTheme.scaffoldBgColor
+                                                  : Colors.grey[500]),
                                           child: Icon(
                                             snapshot.data == null
                                                 ? Icons.add
                                                 : Icons.edit,
+                                            color: ThemeService.light,
                                             key: widget.key,
                                           ),
                                         ),

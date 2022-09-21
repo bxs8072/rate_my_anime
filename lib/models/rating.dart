@@ -25,7 +25,7 @@ class Rating {
 
   factory Rating.fromJSON(dynamic jsonData) {
     return Rating(
-        id: jsonData["id"],
+        id: jsonData["_id"] ?? jsonData["id"],
         userId: jsonData["user"],
         anime: Anime.fromJSON(jsonData["anime"]),
         rating: double.parse(jsonData["rating"].toString()),

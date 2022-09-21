@@ -86,8 +86,10 @@ class _DashboardState extends State<Dashboard>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       appBar: AppBar(
+        backgroundColor: ThemeService.isDarkMode(context)
+            ? DarkTheme.appBarBgColor
+            : ThemeService.primary,
         title: Text("Hello ${widget.person.firstName}"),
         bottom: TabBar(
             controller: tabController,

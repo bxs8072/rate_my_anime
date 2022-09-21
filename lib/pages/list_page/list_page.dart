@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:rate_my_anime/models/person.dart';
 import 'package:rate_my_anime/pages/list_page/list_ui.dart';
+import 'package:rate_my_anime/services/theme_services/dark_theme.dart';
+import 'package:rate_my_anime/services/theme_services/theme_service.dart';
 
 class ListPage extends StatefulWidget {
   final Person person;
@@ -58,6 +60,9 @@ class _ListPageState extends State<ListPage>
     return Scaffold(
       appBar: AppBar(
         title: const Text("Lists"),
+        backgroundColor: ThemeService.isDarkMode(context)
+            ? DarkTheme.appBarBgColor
+            : ThemeService.primary,
         bottom: TabBar(
           isScrollable: true,
           controller: tabController,

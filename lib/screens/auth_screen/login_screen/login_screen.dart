@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:rate_my_anime/api/auth_api.dart';
 import 'package:rate_my_anime/screens/auth_screen/auth_screen_bloc.dart';
 import 'package:rate_my_anime/services/size_services/size_service.dart';
 import 'package:rate_my_anime/services/theme_services/theme_service.dart';
@@ -151,8 +152,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               onPrimary: ThemeService.light,
                             ),
                             onPressed: () {
-                              widget.authScreenBloc
-                                  .update(FormType.forgotPassword);
+                              AuthApi().login(emailController.text.trim(),
+                                  passwordController.text.trim());
                             },
                             child: Text(
                               "Sign In",
