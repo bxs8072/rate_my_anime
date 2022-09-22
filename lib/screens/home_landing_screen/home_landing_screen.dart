@@ -4,6 +4,7 @@ import 'package:rate_my_anime/models/person.dart';
 import 'package:rate_my_anime/screens/home_landing_screen/home_landing_screen_bloc.dart';
 import 'package:rate_my_anime/screens/home_screen/home_screen.dart';
 import 'package:rate_my_anime/screens/setup_account_screen/setup_account_screen.dart';
+import 'package:rate_my_anime/services/theme_services/theme_service.dart';
 
 class HomeLandingScreen extends StatelessWidget {
   HomeLandingScreen({Key? key}) : super(key: key);
@@ -23,14 +24,14 @@ class HomeLandingScreen extends StatelessWidget {
               ),
               content: Text(snapshot.error.toString()),
             );
-          } else if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
-              key: key,
+          } else if (!snapshot.hasData &&
+              snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
               child: CircularProgressIndicator(
-                key: key,
+                color: ThemeService.primary,
               ),
             );
-          } else if (snapshot.data == null) {
+          } else if (!snapshot.hasData) {
             return SetupAccountScreen(
               key: key,
               homeLandingScreenBloc: bloc,

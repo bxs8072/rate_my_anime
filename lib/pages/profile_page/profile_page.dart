@@ -27,9 +27,6 @@ class _ProfilePageState extends State<ProfilePage> {
           slivers: [
             SliverAppBar(
               key: widget.key,
-              backgroundColor: ThemeService.isDarkMode(context)
-                  ? DarkTheme.appBarBgColor
-                  : ThemeService.primary,
               title: Text(
                 "Profile",
                 key: widget.key,
@@ -110,7 +107,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                 return AlertDialog(
                                   title: Text(
                                     "Are you sure?",
-                                    style: GoogleFonts.lato(),
+                                    style: GoogleFonts.lato(
+                                      color: ThemeService.danger,
+                                    ),
                                   ),
                                   content: Text(
                                     "Do you want to logout?",

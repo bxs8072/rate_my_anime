@@ -34,9 +34,6 @@ class _SearchPageState extends State<SearchPage> {
             slivers: [
               SliverAppBar(
                 key: widget.key,
-                backgroundColor: ThemeService.isDarkMode(context)
-                    ? DarkTheme.appBarBgColor
-                    : ThemeService.primary,
                 pinned: true,
                 title: Text(
                   "Search",
@@ -49,10 +46,9 @@ class _SearchPageState extends State<SearchPage> {
                   padding: EdgeInsets.symmetric(
                       horizontal: SizeService.width(context) * 0.03,
                       vertical: SizeService.height(context) * 0.02),
-                  color: ThemeService.isDarkMode(context)
-                      ? DarkTheme.appBarBgColor
-                      : ThemeService.primary,
+                  color: Theme.of(context).appBarTheme.backgroundColor,
                   child: Container(
+                    padding: const EdgeInsets.only(left: 6.0),
                     decoration: BoxDecoration(
                         color: Theme.of(context).scaffoldBackgroundColor,
                         borderRadius: BorderRadius.circular(10.0),
@@ -62,16 +58,10 @@ class _SearchPageState extends State<SearchPage> {
                     child: TextField(
                       controller: textEditingController,
                       decoration: InputDecoration(
-                        contentPadding:
-                            const EdgeInsets.only(left: 6.0, top: 6.0),
                         border: InputBorder.none,
                         hintText: "Search Anime",
                         hintStyle: GoogleFonts.lato(
                           color: ThemeService.secondary,
-                        ),
-                        labelText: "Search",
-                        labelStyle: GoogleFonts.lato(
-                          color: ThemeService.primary,
                         ),
                         suffixIcon: textEditingController.text.isEmpty
                             ? null

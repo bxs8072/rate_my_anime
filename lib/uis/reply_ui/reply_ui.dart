@@ -94,13 +94,8 @@ class _ReplyUIState extends State<ReplyUI> {
                                         const SizedBox(width: 10.0),
                                         Text(
                                           "${widget.review.person.firstName} ${widget.review.person.lastName}",
-                                          style: GoogleFonts.lato(
-                                            fontSize: 14.0,
-                                            color:
-                                                ThemeService.isDarkMode(context)
-                                                    ? ThemeService.light
-                                                    : Colors.black87,
-                                          ),
+                                          style:
+                                              GoogleFonts.lato(fontSize: 14.0),
                                         ),
                                       ],
                                     ),
@@ -124,8 +119,8 @@ class _ReplyUIState extends State<ReplyUI> {
                             style: GoogleFonts.lato(
                               fontSize: 14.0,
                               color: ThemeService.isDarkMode(context)
-                                  ? Colors.white70
-                                  : Colors.black87,
+                                  ? Colors.white
+                                  : Colors.black,
                             ),
                           ),
                         ),
@@ -289,6 +284,7 @@ class _ReplyUIState extends State<ReplyUI> {
                                           ),
                                         ),
                                         Card(
+                                          elevation: 0.00,
                                           shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(10.0),
@@ -306,11 +302,6 @@ class _ReplyUIState extends State<ReplyUI> {
                                                   style: GoogleFonts.lato(
                                                     fontSize: 12.0,
                                                     fontWeight: FontWeight.w700,
-                                                    color:
-                                                        ThemeService.isDarkMode(
-                                                                context)
-                                                            ? ThemeService.light
-                                                            : Colors.black87,
                                                   ),
                                                 ),
                                                 const SizedBox(height: 5.0),
@@ -318,11 +309,6 @@ class _ReplyUIState extends State<ReplyUI> {
                                                   reply.message,
                                                   style: GoogleFonts.lato(
                                                     fontSize: 14.0,
-                                                    color:
-                                                        ThemeService.isDarkMode(
-                                                                context)
-                                                            ? ThemeService.light
-                                                            : Colors.black87,
                                                   ),
                                                 ),
                                                 Row(
@@ -475,14 +461,15 @@ class _ReplyUIState extends State<ReplyUI> {
               ],
             ),
           ),
-          Padding(
+          Container(
+            color: Theme.of(context).cardTheme.color,
             padding: const EdgeInsets.only(bottom: 10.0, left: 8.0, top: 20.0),
             child: Row(
               children: [
                 Expanded(
                   child: Container(
                     decoration: BoxDecoration(
-                      color: Theme.of(context).cardColor,
+                      color: Theme.of(context).scaffoldBackgroundColor,
                       borderRadius: BorderRadius.circular(10.0),
                       border: Border.all(color: ThemeService.secondary),
                     ),

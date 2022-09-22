@@ -60,9 +60,6 @@ class _ListPageState extends State<ListPage>
     return Scaffold(
       appBar: AppBar(
         title: const Text("Lists"),
-        backgroundColor: ThemeService.isDarkMode(context)
-            ? DarkTheme.appBarBgColor
-            : ThemeService.primary,
         bottom: TabBar(
           isScrollable: true,
           controller: tabController,

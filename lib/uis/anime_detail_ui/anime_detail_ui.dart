@@ -411,13 +411,6 @@ class _AnimeDetailUIState extends State<AnimeDetailUI> {
                                                             style: GoogleFonts
                                                                 .lato(
                                                               fontSize: 14.0,
-                                                              color: ThemeService
-                                                                      .isDarkMode(
-                                                                          context)
-                                                                  ? ThemeService
-                                                                      .light
-                                                                  : Colors
-                                                                      .black87,
                                                             ),
                                                           ),
                                                         ],
@@ -451,8 +444,8 @@ class _AnimeDetailUIState extends State<AnimeDetailUI> {
                                                 fontSize: 14.0,
                                                 color: ThemeService.isDarkMode(
                                                         context)
-                                                    ? Colors.white70
-                                                    : Colors.black87,
+                                                    ? Colors.white
+                                                    : Colors.black,
                                               ),
                                             ),
                                           ),

@@ -69,9 +69,6 @@ class _AnimeUIState extends State<AnimeUI> {
           SliverAppBar(
             key: widget.key,
             pinned: true,
-            backgroundColor: ThemeService.isDarkMode(context)
-                ? DarkTheme.appBarBgColor
-                : ThemeService.primary,
             title: Text(widget.value.toUpperCase()),
           ),
           StreamBuilder<List<Anime>>(

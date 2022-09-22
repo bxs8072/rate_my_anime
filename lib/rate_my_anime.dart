@@ -15,7 +15,11 @@ class RateMyAnime extends StatelessWidget {
       saveThemesOnChange: true,
       loadThemeOnInit: true,
       themes: [
-        AppTheme.light(id: LightTheme.id),
+        AppTheme(
+          id: LightTheme.id,
+          data: LightTheme.theme,
+          description: "Light Theme",
+        ),
         AppTheme(
           id: DarkTheme.id,
           data: DarkTheme.darkTheme,

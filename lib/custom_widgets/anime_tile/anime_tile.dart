@@ -41,6 +41,7 @@ class _AnimeTileState extends State<AnimeTile> {
             .push(AnimeDetailUI(anime: widget.anime, person: widget.person));
       },
       child: Card(
+        elevation: 0.00,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
         ),
