@@ -4,11 +4,14 @@ import 'package:rate_my_anime/pages/dashboard/dashboard.dart';
 import 'package:rate_my_anime/pages/list_page/list_page.dart';
 import 'package:rate_my_anime/pages/profile_page/profile_page.dart';
 import 'package:rate_my_anime/pages/search_page/search_page.dart';
+import 'package:rate_my_anime/screens/home_landing_screen/home_landing_screen_bloc.dart';
 import 'package:rate_my_anime/services/theme_services/theme_service.dart';
 
 class HomeScreen extends StatefulWidget {
   final Person person;
-  const HomeScreen({super.key, required this.person});
+  final HomeLandingScreenBloc homeLandingScreenBloc;
+  const HomeScreen(
+      {super.key, required this.person, required this.homeLandingScreenBloc});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -31,6 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ProfilePage(
           key: widget.key,
           person: widget.person,
+          homeLandingScreenBloc: widget.homeLandingScreenBloc,
         ),
       ];
   int currentIndex = 0;

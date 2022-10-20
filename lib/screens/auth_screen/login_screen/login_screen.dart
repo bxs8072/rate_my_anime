@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:rate_my_anime/api/auth_api.dart';
 import 'package:rate_my_anime/screens/auth_screen/auth_screen_bloc.dart';
+import 'package:rate_my_anime/screens/auth_screen/policy_ui/policy_ui.dart';
+import 'package:rate_my_anime/services/navigation_services/navigation_service.dart';
 import 'package:rate_my_anime/services/size_services/size_service.dart';
 import 'package:rate_my_anime/services/theme_services/theme_service.dart';
 import 'package:theme_provider/theme_provider.dart';
@@ -130,6 +132,21 @@ class _LoginScreenState extends State<LoginScreen> {
                           SizedBox(height: SizeService.height(context) * 0.015),
                           TextButton(
                             onPressed: () {
+                              NavigationService(context).push(
+                                PolicyUI(key: widget.key),
+                              );
+                            },
+                            child: Text(
+                              "Privacy and Policy",
+                              style: GoogleFonts.lato(
+                                fontSize: SizeService.height(context) * 0.02,
+                                fontWeight: FontWeight.w700,
+                                color: ThemeService.primary,
+                              ),
+                            ),
+                          ),
+                          TextButton(
+                            onPressed: () {
                               widget.authScreenBloc
                                   .update(FormType.forgotPassword);
                             },
@@ -152,8 +169,33 @@ class _LoginScreenState extends State<LoginScreen> {
                               onPrimary: ThemeService.light,
                             ),
                             onPressed: () {
-                              AuthApi().login(emailController.text.trim(),
-                                  passwordController.text.trim());
+                              AuthApi()
+                                  .login(emailController.text.trim(),
+                                      passwordController.text.trim())
+                                  .catchError((e) {
+                                showDialog(
+                                    context: context,
+                                    builder: (ctx) {
+                                      return AlertDialog(
+                                        title: const Text(
+                                          "Login Failed",
+                                          style: TextStyle(
+                                            color: ThemeService.danger,
+                                          ),
+                                        ),
+                                        content: Text(
+                                            e.toString().split("]")[1].trim()),
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () {
+                                              Navigator.pop(ctx);
+                                            },
+                                            child: const Text("Close"),
+                                          ),
+                                        ],
+                                      );
+                                    });
+                              });
                             },
                             child: Text(
                               "Sign In",

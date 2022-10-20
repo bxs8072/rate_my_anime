@@ -67,7 +67,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '576959977823',
     projectId: 'rate-my-anime-7',
     storageBucket: 'rate-my-anime-7.appspot.com',
-    iosClientId: '576959977823-dra8hla0np0e4bvnif5ogh1pc8hsd2l6.apps.googleusercontent.com',
+    iosClientId:
+        '576959977823-dra8hla0np0e4bvnif5ogh1pc8hsd2l6.apps.googleusercontent.com',
     iosBundleId: 'com.example.rateMyAnime',
   );
 
@@ -77,7 +78,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '576959977823',
     projectId: 'rate-my-anime-7',
     storageBucket: 'rate-my-anime-7.appspot.com',
-    iosClientId: '576959977823-dra8hla0np0e4bvnif5ogh1pc8hsd2l6.apps.googleusercontent.com',
+    iosClientId:
+        '576959977823-dra8hla0np0e4bvnif5ogh1pc8hsd2l6.apps.googleusercontent.com',
     iosBundleId: 'com.example.rateMyAnime',
   );
 }

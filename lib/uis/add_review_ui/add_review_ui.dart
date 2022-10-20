@@ -21,7 +21,9 @@ class AddReviewUI extends StatefulWidget {
 
 class _AddReviewUIState extends State<AddReviewUI> {
   TextEditingController textEditingController = TextEditingController();
-  Rating? rating;
+
+  Rating? initRating;
+  double rating = 0.00;
 
   @override
   void initState() {
@@ -32,7 +34,8 @@ class _AddReviewUIState extends State<AddReviewUI> {
         .then((value) {
       if (value != null) {
         setState(() {
-          rating = value;
+          initRating = value;
+          rating = value.rating;
         });
       }
     });
@@ -101,24 +104,21 @@ class _AddReviewUIState extends State<AddReviewUI> {
                                 children: [
                                   Expanded(
                                     child: Slider(
-                                        value: rating == null
-                                            ? 0.00
-                                            : rating!.rating,
+                                        value: rating,
                                         max: 10.00,
                                         min: 0.00,
                                         divisions: 20,
                                         activeColor: ThemeService.primary,
                                         thumbColor: ThemeService.primary,
-                                        label:
-                                            "⭐️ ${rating == null ? 0.00 : rating!.rating}",
+                                        label: "⭐️ $rating",
                                         onChanged: (val) {
                                           setState(() {
-                                            rating!.rating = val;
+                                            rating = val;
                                           });
                                         }),
                                   ),
                                   Text(
-                                    "⭐️ ${rating == null ? 0.00 : rating!.rating}",
+                                    "⭐️ $rating",
                                     style: GoogleFonts.lato(
                                       fontSize: 14.0,
                                       fontWeight: FontWeight.w700,
@@ -142,25 +142,42 @@ class _AddReviewUIState extends State<AddReviewUI> {
                     onPrimary: ThemeService.light,
                   ),
                   onPressed: () async {
-                    if (rating == null) {
-                      await RatingApi().create(
-                        anime: widget.anime,
-                        rating: rating!.rating,
-                        userId: widget.person.id,
-                      );
-                      await ReviewApi().create(
-                          anime: widget.anime,
-                          message: textEditingController.text.trim(),
-                          userId: widget.person.id);
+                    if (textEditingController.text.isEmpty) {
+                      showDialog(
+                          context: context,
+                          builder: (ctx) {
+                            return AlertDialog(
+                              title: const Text("Review"),
+                              content: const Text("Review should not be empty"),
+                              actions: [
+                                TextButton(
+                                    onPressed: () {
+                                      Navigator.pop(ctx);
+                                    },
+                                    child: const Text("Close"))
+                              ],
+                            );
+                          });
                     } else {
-                      await RatingApi().update(rating: rating!);
-                      await ReviewApi().create(
+                      if (initRating == null) {
+                        await RatingApi().create(
                           anime: widget.anime,
-                          message: textEditingController.text.trim(),
-                          userId: widget.person.id);
+                          rating: rating,
+                          userId: widget.person.id,
+                        );
+                      } else {
+                        initRating!.rating = rating;
+                        await RatingApi().update(rating: initRating!);
+                      }
+                      await ReviewApi()
+                          .create(
+                              anime: widget.anime,
+                              message: textEditingController.text.trim(),
+                              userId: widget.person.id)
+                          .then((value) {
+                        Navigator.pop(context);
+                      });
                     }
-
-                    Navigator.pop(context);
                   },
                   child: Text(
                     "Submit",

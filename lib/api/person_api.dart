@@ -10,7 +10,7 @@ class PersonApi {
   Future<Person?> retrievePerson() async {
     try {
       Response response = await http.post(
-        Uri.parse("${ApiService.baseURL}/user/"),
+        Uri.parse("${ApiService.baseURL}/user/current"),
         headers: <String, String>{
           "x-api-key": ApiService.apiKey,
           "token": await ApiService.token,
@@ -38,6 +38,34 @@ class PersonApi {
     try {
       Response response = await http.post(
         Uri.parse("${ApiService.baseURL}/user/create"),
+        headers: <String, String>{
+          "x-api-key": ApiService.apiKey,
+          "token": await ApiService.token,
+        },
+        body: json.encode({
+          "firstName": firstname,
+          "middleName": middlename,
+          "lastName": lastname,
+          "displayImage": displayImage,
+        }),
+      );
+
+      var jsonResponse = response.body;
+
+      // print(jsonResponse);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> update(
+      {required String firstname,
+      required String middlename,
+      required String lastname,
+      required String displayImage}) async {
+    try {
+      Response response = await http.post(
+        Uri.parse("${ApiService.baseURL}/user/update"),
         headers: <String, String>{
           "x-api-key": ApiService.apiKey,
           "token": await ApiService.token,

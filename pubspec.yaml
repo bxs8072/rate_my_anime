@@ -50,7 +50,8 @@ dependencies:
 
   # Tools
   email_validator: ^2.1.17
-  intl:
+  intl: ^0.17.0
+  image_picker: ^0.8.5+3
 
 dev_dependencies:
   flutter_test:

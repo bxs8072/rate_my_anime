@@ -39,6 +39,7 @@ class HomeLandingScreen extends StatelessWidget {
           } else {
             return HomeScreen(
               key: key,
+              homeLandingScreenBloc: bloc,
               person: snapshot.data!,
             );
           }

@@ -13,8 +13,6 @@ class Person {
   });
 
   Map<String, dynamic> get toJSON => {
-        "uid": uid,
-        "email": email,
         "firstName": firstName,
         "middleName": middleName ?? "",
         "lastName": lastName,

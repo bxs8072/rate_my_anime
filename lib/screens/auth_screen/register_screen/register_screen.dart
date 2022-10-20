@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:rate_my_anime/api/auth_api.dart';
 import 'package:rate_my_anime/screens/auth_screen/auth_screen_bloc.dart';
+import 'package:rate_my_anime/screens/auth_screen/policy_ui/policy_ui.dart';
+import 'package:rate_my_anime/services/navigation_services/navigation_service.dart';
 import 'package:rate_my_anime/services/size_services/size_service.dart';
 import 'package:rate_my_anime/services/theme_services/theme_service.dart';
 import 'package:theme_provider/theme_provider.dart';
@@ -191,6 +193,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             ),
                           ),
                           SizedBox(height: SizeService.height(context) * 0.015),
+                          TextButton(
+                            onPressed: () {
+                              NavigationService(context).push(
+                                PolicyUI(key: widget.key),
+                              );
+                            },
+                            child: Text(
+                              "Privacy and Policy",
+                              style: GoogleFonts.lato(
+                                fontSize: SizeService.height(context) * 0.02,
+                                fontWeight: FontWeight.w700,
+                                color: ThemeService.primary,
+                              ),
+                            ),
+                          ),
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
                               shape: RoundedRectangleBorder(
