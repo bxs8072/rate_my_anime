@@ -57,7 +57,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           NetworkImage(widget.person.displayImage!),
                       radius: SizeService.height(context) * 0.08,
                       child: Text(
-                        widget.person.displayImage!.isNotEmpty
+                        widget.person.displayImage!.isEmpty
                             ? ""
                             : "${widget.person.firstName[0]} ${widget.person.lastName[0]}",
                         style: GoogleFonts.lato(
